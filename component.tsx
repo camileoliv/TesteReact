@@ -1,21 +1,33 @@
-import {Text, View, Button, TextInput, StyleSheet} from 'react-native';
+import { Text, View, Button, TextInput, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
 
-import React from 'react';
+export default function Component() {
+    const [moeda, setMoeda] = useState('')
 
-export default function Component(){
+    function converter(valor) {
+
+        if (valor == '') {
+            alert("Campo vazio")
+        } else {
+            alert(`Valor dolar: $${(valor / 5.60).toFixed(2)} 
+            \nValor euro: $${(valor / 6.18).toFixed(2)}`)
+        }
+    }
+
     return (
         // View é div 
-        <View style = {style.caixa}>
+        <View style={style.caixa}>
 
-            <Text style = {style.ctitle}>Valor:</Text>
-            <TextInput style= {style.cinput} keyboardType='numeric'/>
-            <Button  title='Converter'/>
-            
+            <Text style={style.ctitle}>Valor:</Text>
+            <TextInput style={style.cinput} keyboardType='numeric' value={moeda} onChangeText={setMoeda} />
+            <Button title='Converter' 
+            onPress={()=>converter(moeda)}/>
+
         </View>
-);
+    );
 }
 
-const style = StyleSheet.create ({
+const style = StyleSheet.create({
     caixa: {
         backgroundColor: 'white',
         width: '55%',
@@ -34,7 +46,7 @@ const style = StyleSheet.create ({
         width: '100%',
         borderWidth: 1,
         borderColor: '#2196f3',
-        marginBottom: 15, 
+        marginBottom: 15,
         marginTop: 10,
     }
 
